@@ -11,4 +11,5 @@
  - Personagens 
    - Inimigos: bandidos, militares do Fogo Eterno: Soldado, Mestres do Círculo.
    - Aliados: Ferreiros, Médicos, Comerciantes.
+   - Cidadãos
    - Paladino
