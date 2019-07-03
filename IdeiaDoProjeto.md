@@ -13,7 +13,7 @@
    - Neutros: Médicos, Comerciantes, Cidadãos.
    - Paladino
    
- #TODO
+# TODO
   - Armaduras
   - Neutros: Ferreiros
   - Inimigos: Mestres do Círculo
