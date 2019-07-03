@@ -1,6 +1,6 @@
 # Light Path 
 
- - Paladino, há muito tempo uma classe de guerreiros da Luz que foram extentitos com a ascensão do Fogo Eterno, propagada pela nobreza descontente com a igualdade disseminada pelos seguidores da Luz. Após um período de exílio, estudando a Luz, você decide que é hora de libertar os plebeus da subjugação estabelecida pelo culto do Fogo Eterno.
+ - Paladino, há muito tempo uma classe de guerreiros da Luz que foram extintos com a ascensão do Fogo Eterno, propagada pela nobreza descontente com a igualdade disseminada pelos seguidores da Luz. Após um período de exílio, estudando a Luz, você decide que é hora de libertar os plebeus da subjugação estabelecida pelo culto do Fogo Eterno.
 
  - Apenas uma classe: Paladino 
    - Sendo um Paladino, você é dotado de seu escudo (fiel companheiro de batalha: Farol do Amanhecer), e de uma espada. Embora você possua uma espada, sua principal arma é seu escudo, pois é por meio dele que você é capaz de canalizar o poder da Luz e destruir hordas inteiras.
