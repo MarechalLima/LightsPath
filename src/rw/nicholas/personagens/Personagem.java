@@ -91,4 +91,8 @@ public abstract class Personagem {
 		return this.dado;
 	}
 	
+	public boolean getVivo() {
+		return this.vivo;
+	}
+	
 }
