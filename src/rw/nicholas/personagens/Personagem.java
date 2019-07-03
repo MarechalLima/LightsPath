@@ -3,19 +3,42 @@ package rw.nicholas.personagens;
 import java.util.Random;
 
 public abstract class Personagem {
-	private int vida;
-	private int dinheiro; //inteiro pelo contexto, o dinheiro é uma unidade 
+	private String nome;
+	private int dado; //serve tanto para vida como para dano, ações serão um d20 convencional
+	private int vida = 0;
+	private int dano = 0;
+	private int ouro = 0; //inteiro pelo contexto, o dinheiro é uma unidade e nesse contexto
 	private boolean vivo;	  //	... fixa de troca, sem ponto flutuante: moedas de ouro, por exemplo
 	
-	private Random rand = new Random();
+	protected Random rand = new Random();
 	
-	public Personagem() {
+	public Personagem(String nome, int dado) {
+		this.vida = randDado(dado, 2);
+		this.dano = randDado(dado, 1);
+		this.ouro = randDado(50, 1);
+		this.dado = dado;
+		this.nome = nome;
 		this.vivo = true;
-		this.aumentarVida();
-		this.dinheiro = rand.nextInt(100)+1; // para todos os personagem o dinheiro inicial é random, apenas para um futuro loot
 	}
 	
-	public abstract void aumentarVida(); //por ser um rpg, essa característica é definida randomicamente
+	public Personagem(String nome, int dado, int ouro) {
+		this.vida = randDado(dado, 2);
+		this.dano = randDado(dado, 1);
+		this.ouro = randDado(ouro, 1);
+		this.dado = dado;
+		this.nome = nome;
+		this.vivo = true;
+	}
+	
+	public int randDado(int dado, int vezes) {
+		int retornaValor = 0;
+		for (int i = 0; i < vezes; i++) {
+			retornaValor += (rand.nextInt(dado)+1);
+		}
+		return retornaValor;
+	}
+	
+	public abstract void aumentarVida();
 	
 	public boolean subtrairVida(int vida) { //Retorna se o personagem está vivo também
 		if (vida >= 0) {
@@ -28,23 +51,44 @@ public abstract class Personagem {
 		return this.vivo;
 	}
 	
+	public void removerOuro(int ouro) {
+		if (ouro >= 0 && (this.ouro - ouro) >= 0) {
+			this.ouro -= ouro;
+		}
+	}
+	
+	public void inserirOuro(int ouro) {
+		if (ouro >= 0) {
+			this.ouro += ouro;
+		}
+	}
+	
+	public void restaurarVida(int vidaMax) {
+		this.vida = vidaMax;
+	}
+	
+	public void setVida(int vida) {
+		this.vida+= vida;
+	}
+	
 	public int getVida() {
 		return this.vida;
 	}
 	
-	public int getDinheiro() {
-		return this.dinheiro;
+	public int getOuro() {
+		return this.ouro;
+	}
+
+	public int getDano() {
+		return this.dano;
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public int getDado() {
+		return this.dado;
 	}
 	
-	public void removerDinheiro(int dinheiro) {
-		if (dinheiro >= 0 && (this.dinheiro - dinheiro) >= 0) {
-			this.dinheiro -= dinheiro;
-		}
-	}
-	
-	public void inserirDinheiro(int dinheiro) {
-		if (dinheiro >= 0) {
-			this.dinheiro += dinheiro;
-		}
-	}
 }
