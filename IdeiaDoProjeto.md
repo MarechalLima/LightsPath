@@ -9,6 +9,11 @@
 
 # Estrutura do jogo
  - Personagens 
-   - Inimigos: bandidos, militares do Fogo Eterno: Soldado, Mestres do Círculo.
-   - Neutros: Ferreiros, Médicos, Comerciantes, Cidadãos.
+   - Inimigos: bandidos, militares do Fogo Eterno: Soldado.
+   - Neutros: Médicos, Comerciantes, Cidadãos.
    - Paladino
+   
+ #TODO
+  - Armaduras
+  - Neutros: Ferreiros
+  - Inimigos: Mestres do Círculo
