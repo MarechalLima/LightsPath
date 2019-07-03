@@ -2,6 +2,7 @@ package rw.nicholas.personagens;
 
 public class Paladino extends Personagem{
 	private int maxVida; //O médico cura apenas o paladino, por enquanto
+	public final String AFINIDADE = "luz";
 	
 	public Paladino(String nome, int dado, int ouro) {
 		super(nome, dado, ouro);
