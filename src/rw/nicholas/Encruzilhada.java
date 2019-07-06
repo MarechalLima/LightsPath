@@ -1,7 +1,9 @@
 package rw.nicholas;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import rw.nicholas.personagens.Inimigo;
 import rw.nicholas.personagens.Paladino;
 
 public class Encruzilhada {
@@ -21,8 +23,9 @@ public class Encruzilhada {
 			
 			switch (opt) {
 			case 1:
-				System.out.println("Como fiél guerreiro da Luz, você irá defender o direito daqueles que também quiserem seguir o caminho da Luz");
+				System.out.println("Como fiél guerreiro da Luz, você irá defender o direito daqueles que também quiserem seguir o caminho da Luz.\n");
 				bandidosEncruzilhada();
+				tmpCount = 3; // Para sair do loop
 				break;
 
 			default:
@@ -45,6 +48,11 @@ public class Encruzilhada {
 	
 	private void bandidosEncruzilhada() {
 		int opt = 0;
+		boolean continuar = true;
+		ArrayList<Inimigo> inimigos = new ArrayList<Inimigo>();
+		inimigos.add(new Inimigo("Quebra-Ossos", 10));
+		inimigos.add(new Inimigo("Palitinho", 6));
+		
 		do {
 			System.out.println("Seguindo sua viagem a Novigrad, você dá de cara com dois brutamontes que tinham a insígnia do Fogo Eterno em seus trapos."
 					+ "\nO que você faz?\n"
@@ -52,22 +60,38 @@ public class Encruzilhada {
 					+ "\t2- Sacar arma\n"
 					+ "\t3- Consultar informações do seu Paladino");
 			opt = input.nextInt();
+			
 			switch (opt) {
 			case 1:
-				
-				break;
+				if (paladino.randDado(20, 1) >= 15) {
+					System.out.println("Parabéns, você conseguiu conjurar 'Manto do Exilado', ficando oculto.");
+					continuar = false;
+					break;
+				}
 			case 2:
-				
+				for (Inimigo e : inimigos) {
+					ModoBatalha fight = new ModoBatalha(paladino, e);
+					fight.batalhar();
+				}
+				if (paladino.getVivo()) {
+					System.out.println("Parabéns, por meio de sua fé e determinação você foi capaz de superar mais esses obstáculos.\n");
+					continuar = false;
+				} else {
+					System.out.println("Você não foi capaz de defender o povo de Novigrad, o Fogo Eterno queimou você.");
+					continuar = false;
+				}
 				break;
 			case 3:
-				
+				System.out.println(paladino.toString());
+				continuar = true;
 				break;
 
 			default:
 				System.out.println("Opção inválida!");
+				continuar = true;
 				break;
 			}
-		} while(opt != 1 || opt != 2);
+		} while(continuar);
 		
 	}
 	
