@@ -25,4 +25,9 @@ public class Paladino extends Personagem{
 		this.maxVida = maxVida;
 	}
 	
+	@Override
+	public String toString() {
+		return "Nome: " + super.getNome() + " | Vida: " + getVida() + " | Ouro: " + super.getOuro() + " | Afinidade: " + AFINIDADE;
+	}
+	
 }
