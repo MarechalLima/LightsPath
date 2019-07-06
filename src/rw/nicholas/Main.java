@@ -23,8 +23,12 @@ public class Main {
 				+ "\nQual caminho você irá escolher? Sabendo que no caminho de Novigrad você vê a chama do Fogo Eterno.");
 		
 		encruzilhada = new Encruzilhada(paladino);
+		//Fim de Jogo
+		System.out.println(paladino.toString());
 		if (paladino.getVivo() == false) {
-			System.out.println("\nFim de Jogo!");
+			System.out.println("\nVocê morreu! Fim de Jogo!");
+		} else {
+			System.out.println("\nVocê cumpriu seu objetivo, Paladino! Que a Luz seja sempre seu guia!");
 		}
 	}
 
