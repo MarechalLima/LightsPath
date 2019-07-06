@@ -58,6 +58,10 @@ public class Novigrad extends Fase{
 		return retorno;
 	}
 	
+	private void tabernaDialog() {
+		
+	}
+	
 	private void medicDialog() {
 		System.out.println("\t"+medico.getNome()+": O que posso fazer por você, meu filho?");
 		System.out.println("\t\t1- Curar"
