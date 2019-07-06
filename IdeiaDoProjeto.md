@@ -15,5 +15,6 @@
    
 # TODO
   - Armaduras
+  - Escudo
   - Neutros: Ferreiros
   - Inimigos: Mestres do Círculo
