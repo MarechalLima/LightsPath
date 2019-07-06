@@ -15,4 +15,8 @@ public class ModoCura {
 		return medico.Curar(paladino);
 	}
 	
+	public boolean aumentarVida() {
+		return medico.aumentarVidaDe(paladino);
+	}
+	
 }

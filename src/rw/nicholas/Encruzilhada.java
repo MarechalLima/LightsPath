@@ -6,7 +6,7 @@ import java.util.Scanner;
 import rw.nicholas.personagens.Inimigo;
 import rw.nicholas.personagens.Paladino;
 
-public class Encruzilhada {
+public class Encruzilhada extends Fase{
 	private int tmpCount;
 	private Scanner input = new Scanner(System.in);
 	private Paladino paladino;

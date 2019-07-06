@@ -1,5 +1,6 @@
 package rw.nicholas;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import rw.nicholas.personagens.Paladino;
@@ -13,6 +14,9 @@ public class Main {
 		Paladino paladino = new Paladino(jogador, 20, 100);
 		Encruzilhada encruzilhada = new Encruzilhada(paladino);
 		Novigrad novigrad = new Novigrad(paladino);
+		ArrayList<Fase> fases = new ArrayList<Fase>();
+		fases.add(encruzilhada);
+		fases.add(novigrad);
 		
 		System.out.println("Muito bem, " + jogador + ". Prepare-se para uma aventura que se passa nos reinos"
 				+ " do norte.\n\tVocê é um Paladino, uma classe de fiéis guerreiros da Luz, que com a perseguição"
@@ -23,10 +27,10 @@ public class Main {
 				+ "\n\t2- À sua esquerda Kaer Morhen\n\t3- Atrás de você, está Velen\n\t4- E à sua direita Oxenfurt"
 				+ "\nQual caminho você irá escolher? Sabendo que no caminho de Novigrad você vê a chama do Fogo Eterno.");
 		
-		encruzilhada.start();
-		
-		if (paladino.getVivo())
-			novigrad.start();
+		for (Fase e : fases) {
+			if (paladino.getVivo())
+				e.start();
+		}
 		
 		
 		//Fim de Jogo
