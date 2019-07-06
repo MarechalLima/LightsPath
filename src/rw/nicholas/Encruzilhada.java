@@ -14,10 +14,9 @@ public class Encruzilhada {
 	public Encruzilhada(Paladino paladino) {
 		this.paladino = paladino;
 		tmpCount = 0;
-		escolha();
 	}
 	
-	private void escolha() {
+	public void start() {
 		do {
 			int opt = input.nextInt();
 			

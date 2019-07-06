@@ -11,7 +11,8 @@ public class Main {
 		System.out.println("Qual o seu nome (primeiro apenas)?");
 		String jogador = input.next();
 		Paladino paladino = new Paladino(jogador, 20, 100);
-		Encruzilhada encruzilhada;
+		Encruzilhada encruzilhada = new Encruzilhada(paladino);
+		Novigrad novigrad = new Novigrad(paladino);
 		
 		System.out.println("Muito bem, " + jogador + ". Prepare-se para uma aventura que se passa nos reinos"
 				+ " do norte.\n\tVocê é um Paladino, uma classe de fiéis guerreiros da Luz, que com a perseguição"
@@ -22,7 +23,12 @@ public class Main {
 				+ "\n\t2- À sua esquerda Kaer Morhen\n\t3- Atrás de você, está Velen\n\t4- E à sua direita Oxenfurt"
 				+ "\nQual caminho você irá escolher? Sabendo que no caminho de Novigrad você vê a chama do Fogo Eterno.");
 		
-		encruzilhada = new Encruzilhada(paladino);
+		encruzilhada.start();
+		
+		if (paladino.getVivo())
+			novigrad.start();
+		
+		
 		//Fim de Jogo
 		System.out.println(paladino.toString());
 		if (paladino.getVivo() == false) {
