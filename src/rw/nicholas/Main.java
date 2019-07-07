@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		System.out.println("ATENÇÃO: Este jogo utiliza um d20 para verificar se uma ação sua é bem-sucedida, bem como para"
-				+ " determinar quem inicia uma batalha. Além disso, todos os informações dos personagens, também são definidas"
+				+ " determinar quem inicia uma batalha. Além disso, todos as informações dos personagens, também são definidas"
 				+ " randomicamente por um dado de X faces. Utilize a tecla Enter para avançar diálogos!");
 		input.nextLine(); //Pausa para Disclaimer
 		
