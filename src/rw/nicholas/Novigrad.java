@@ -164,7 +164,6 @@ public class Novigrad extends Fase{
 			
 			if (paladino.getVivo()) {
 				for (String chave : inimigos.keySet()) {
-					System.out.println(chave);
 					inimigos.remove(chave);
 				}
 			}
