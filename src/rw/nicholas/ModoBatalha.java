@@ -1,4 +1,6 @@
 package rw.nicholas;
+import java.util.Scanner;
+
 import rw.nicholas.personagens.*;
 
 public class ModoBatalha {
@@ -29,10 +31,13 @@ public class ModoBatalha {
 		
 		if (paladino.getVivo()) {
 			this.vencedor = paladino;
+			System.out.println(paladino.getNome()+" derrotou "+personagem.getNome());
 		} else {
 			this.vencedor = personagem;
+			System.out.println(personagem.getNome()+" derrotou "+paladino.getNome());
 		}
-		
+		Scanner input = new Scanner(System.in);
+		input.nextLine();
 		return this.vencedor;
 	}
 	

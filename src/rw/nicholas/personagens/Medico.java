@@ -10,7 +10,7 @@ public class Medico extends Neutro{
 	}
 	
 	public boolean Curar(Paladino paladino) {
-		if (paladino.getOuro() >= precoCobrar) {
+		if (paladino.getOuro() >= precoCobrar && paladino.getVida() < paladino.getMaxVida()) {
 			paladino.curar();
 			paladino.removerOuro(precoCobrar);
 			return true;

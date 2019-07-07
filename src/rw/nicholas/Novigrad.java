@@ -24,7 +24,7 @@ public class Novigrad extends Fase{
 		inimigos.put("thugTaberna", new Inimigo("Cabeça de Martelo", 10));
 		inimigos.put("thugVigia", new Inimigo("Salamandra", 8));
 		plebeus.put("plebeuTraira", new Plebeu("Ingvar", 6, "fogo eterno"));
-		plebeus.put("plebeuTaverna", new Plebeu("Sigvarson", 6, "luz"));
+		plebeus.put("plebeuTaberna", new Plebeu("Sigvarson", 6, "luz"));
 	}
 	
 	public void start() {
@@ -172,7 +172,7 @@ public class Novigrad extends Fase{
 	}
 	
 	private void medicDialog() {
-		System.out.println("\t"+medico.getNome()+": O que posso fazer por você, meu filho?");
+		System.out.println("\t --"+medico.getNome()+": O que posso fazer por você, meu filho?");
 		System.out.println("\t\t1- Curar\n"
 				+ "\t\t2- Aumentar vida\n"
 				+ "\t\t3- Desculpe-me, foi um engano\n");
@@ -184,7 +184,7 @@ public class Novigrad extends Fase{
 			if (mc.curar()) {
 				System.out.println("\t --"+medico.getNome()+": Deixe-me ver isso ... Pronto, agora está inteiro novamente!");
 			} else {
-				System.out.println("Você não tem ouro suficiente!");
+				System.out.println("Não há nada que eu possa fazer aqui!");
 			}
 			break;
 		case 2:
