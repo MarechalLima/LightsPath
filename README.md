@@ -1,4 +1,6 @@
 # Light's Path 
+ - Light's Path é um jogo RPG em modo texto, que tenta simular um gameplay parecido com RPG de mesa (D&D), embora com várias modificações para simplificar o projeto.
+ 
    ## Integrante: Nícholas Lima de Souza Silva
  - Paladino, há muito tempo uma classe de guerreiros da Luz que foram extintos com a ascensão do Fogo Eterno, propagada pela nobreza descontente com a igualdade disseminada pelos seguidores da Luz. Após um período de exílio, estudando a Luz, você decide que é hora de libertar os plebeus da subjugação estabelecida pelo culto do Fogo Eterno.
 
@@ -12,6 +14,10 @@
    - Inimigos: bandidos/guardas do Fogo Eterno: Soldado.
    - Neutros: Médico, Cidadãos.
    - Paladino
+   
+  - Em cada batalha (que é na verdade um duelo), é sorteado uma iniciativa para determinar qual dos personagens irá iniciar batendo.
+  - O objetivo do Paladino, inicialmente, é derrotar todos os Inimigos, que estão a serviço do Fogo Eterno.
+  - O jogo acaba quando o item anterior acontecer, ou o Paladino morrer.
 
 # TODO
   - Armaduras
