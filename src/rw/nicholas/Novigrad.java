@@ -20,25 +20,28 @@ public class Novigrad extends Fase{
 		this.paladino = paladino;
 		medico = new Medico("Doctor", 5);
 		inimigos.put("thugTaberna", new Inimigo("Cabeça de Martelo", 10));
-		inimigos.put("thugHospedaria", new Inimigo("Salamandra", 8));
+		inimigos.put("thugVigia", new Inimigo("Salamandra", 8));
 		plebeus.put("plebeuTraira", new Plebeu("Ingvar", 6, "fogo eterno"));
 		plebeus.put("plebeuTaverna", new Plebeu("Sigvarson", 6, "luz"));
 	}
 	
 	public void start() {
 		System.out.println("Você finalmente chegou a Novigrad, uma cidade deslumbrante à primeira vista.");
-		while (!inimigos.isEmpty()) {
-			System.out.println("O que você deseja fazer?");
+		while (!inimigos.isEmpty() && paladino.getVivo()) {
+			System.out.println("Você está nas ruas de Novigrad, o que você deseja fazer?");
 			int opt = menu();
 			
 			switch (opt) {
 			case 1:
-				
+				tabernaDialog();
 				break;
 			case 2:
 				medicDialog();
 				break;
 			case 3:
+				casaPlebeuDialog();
+				break;
+			case 4:
 				System.out.println(paladino.toString());
 				break;
 
@@ -52,14 +55,87 @@ public class Novigrad extends Fase{
 	private int menu() {
 		System.out.println("\t1- Ir a taberna\n"
 				+ "\t2- Visitar um médico\n"
-				+ "\t3- Ver informações do Paladino");
+				+ "\t3- Procurar ajuda em alguma casa"
+				+ "\t4- Ver informações do Paladino");
 		int retorno = input.nextInt();
 		
 		return retorno;
 	}
 	
 	private void tabernaDialog() {
+		System.out.println("\tTaberneiro: Bom dia, senhor... Eu acho melhor o senhor se retirar, a Luz foi há muito"
+				+ "substituida pelo Fogo Eterno... Além do mais, há sempre guarda aqui.");
+		int opt = tabernaMenuTaberneiro();
 		
+		switch (opt) {
+		case 1:
+			tabernaDialog1();
+			break;
+		case 2:
+			tabernaDialog2();
+			break;
+		case 3:
+			tabernaDialog3();
+			break;
+		default:
+			System.out.println("Opção inválida!");
+			break;
+		}
+		
+	}
+	
+	private int tabernaMenuTaberneiro() {
+		System.out.println("\t1- Não estou fazendo nada de errado, quero apenas um hidromel\n"
+				+ "\t2- Estou protegido pela Luz, nem exércitos poderão me tocar\n"
+				+ "\t3- Tudo bem, que a Luz seja seu guia (Sair)");
+		int retorno = input.nextInt();
+		
+		return retorno;
+	}
+	
+	private void tabernaDialog1() {
+		System.out.println("\t"+inimigos.get("thugTaberna").getNome()+": Vejam só o que temos aqui, um escravo da Luz..."
+				+ " Achei que sua raça estivesse extinta... Mas não importa, eu me certificarei disso");
+		ModoBatalha duelo = new ModoBatalha(paladino, inimigos.get("thugTaberna"));
+		duelo.batalhar();
+		if (duelo.quemVenceu() instanceof Paladino) {
+			System.out.println("\tEmbora tivesse vencido, o Paladino sabia que precisaria de ajuda para continuar...");
+		}
+	}
+	
+	private void tabernaDialog2() {
+		System.out.println("\t"+inimigos.get("thugTaberna").getNome()+": Vejam só o que temos aqui, um idiota, e ainda se acha... Veremos se"
+				+ " ele vai conseguir sair vivo daqui! "+inimigos.get("thugVigia").getNome()+"! Venha já aqui, temos que"
+						+ " tirar o lixo!");
+		for (Inimigo e : inimigos.values()) {
+			ModoBatalha fight = new ModoBatalha(paladino, e);
+			fight.batalhar();
+		}
+	}
+	
+	private void tabernaDialog3() {
+		System.out.println("\t"+inimigos.get("thugVigia").getNome()+": Onde pensa que vai, Paladino?");
+		ModoBatalha duelo = new ModoBatalha(paladino, inimigos.get("thugVigia"));
+		duelo.batalhar();
+		if (duelo.quemVenceu() instanceof Paladino) {
+			System.out.println("\t"+plebeus.get("plebeuTaberna").getNome()+": Você deveria procurar um médico antes, "
+					+ "é perigoso até mesmo para um Paladino andar ferido.");
+		}
+	}
+	
+	private void casaPlebeuDialog() {
+		System.out.println("\t"+plebeus.get("plebeuTraira").getNome()+": GUARDAS, O PALADINO ESTÁ AQUI!");
+		System.out.println("\t\t\t"+plebeus.get("plebeuTraira").getNome()+"ataca você enquanto os guardas chegam");
+		ModoBatalha duelo = new ModoBatalha(paladino, plebeus.get("plebeuTraira"));
+		duelo.batalhar();
+		if (duelo.quemVenceu() instanceof Paladino) {
+			System.out.println("\tGuardas: Ataquem o Paladino!");
+			
+			for (Inimigo e : inimigos.values()) {
+				ModoBatalha fight = new ModoBatalha(paladino, e);
+				fight.batalhar();
+			}
+		}
 	}
 	
 	private void medicDialog() {
