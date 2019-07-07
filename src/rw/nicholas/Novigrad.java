@@ -55,8 +55,8 @@ public class Novigrad extends Fase{
 	private int menu() {
 		System.out.println("\t1- Ir a taberna\n"
 				+ "\t2- Visitar um médico\n"
-				+ "\t3- Procurar ajuda em alguma casa"
-				+ "\t4- Ver informações do Paladino");
+				+ "\t3- Procurar ajuda em alguma casa\n"
+				+ "\t4- Ver informações do Paladino\n");
 		int retorno = input.nextInt();
 		
 		return retorno;
@@ -64,7 +64,7 @@ public class Novigrad extends Fase{
 	
 	private void tabernaDialog() {
 		System.out.println("\tTaberneiro: Bom dia, senhor... Eu acho melhor o senhor se retirar, a Luz foi há muito"
-				+ "substituida pelo Fogo Eterno... Além do mais, há sempre guarda aqui.");
+				+ " substituida pelo Fogo Eterno... Além do mais, há sempre guarda aqui.");
 		int opt = tabernaMenuTaberneiro();
 		
 		switch (opt) {
@@ -87,19 +87,20 @@ public class Novigrad extends Fase{
 	private int tabernaMenuTaberneiro() {
 		System.out.println("\t1- Não estou fazendo nada de errado, quero apenas um hidromel\n"
 				+ "\t2- Estou protegido pela Luz, nem exércitos poderão me tocar\n"
-				+ "\t3- Tudo bem, que a Luz seja seu guia (Sair)");
+				+ "\t3- Tudo bem, que a Luz seja seu guia (Sair)\n");
 		int retorno = input.nextInt();
 		
 		return retorno;
 	}
 	
 	private void tabernaDialog1() {
-		System.out.println("\t"+inimigos.get("thugTaberna").getNome()+": Vejam só o que temos aqui, um escravo da Luz..."
-				+ " Achei que sua raça estivesse extinta... Mas não importa, eu me certificarei disso");
+		System.out.println("\t --"+inimigos.get("thugTaberna").getNome()+": Vejam só o que temos aqui, um escravo da Luz..."
+				+ " Achei que sua raça estivesse extinta... Mas não importa, eu me certificarei disso\n");
 		ModoBatalha duelo = new ModoBatalha(paladino, inimigos.get("thugTaberna"));
 		duelo.batalhar();
 		if (duelo.quemVenceu() instanceof Paladino) {
-			System.out.println("\tEmbora tivesse vencido, o Paladino sabia que precisaria de ajuda para continuar...");
+			System.out.println("Embora tivesse vencido, o Paladino sabia que precisaria de ajuda para continuar...\n");
+			inimigos.remove("thugTaberna");
 		}
 	}
 	
@@ -111,51 +112,62 @@ public class Novigrad extends Fase{
 			ModoBatalha fight = new ModoBatalha(paladino, e);
 			fight.batalhar();
 		}
+		if (paladino.getVivo()) {
+			for (String chave : inimigos.keySet()) {
+				inimigos.remove(chave);
+			}
+		}
 	}
 	
 	private void tabernaDialog3() {
-		System.out.println("\t"+inimigos.get("thugVigia").getNome()+": Onde pensa que vai, Paladino?");
+		System.out.println("\t --"+inimigos.get("thugVigia").getNome()+": Onde pensa que vai, Paladino?");
 		ModoBatalha duelo = new ModoBatalha(paladino, inimigos.get("thugVigia"));
 		duelo.batalhar();
 		if (duelo.quemVenceu() instanceof Paladino) {
-			System.out.println("\t"+plebeus.get("plebeuTaberna").getNome()+": Você deveria procurar um médico antes, "
+			System.out.println("\t --"+plebeus.get("plebeuTaberna").getNome()+": Você deveria procurar um médico antes, "
 					+ "é perigoso até mesmo para um Paladino andar ferido.");
 		}
 	}
 	
 	private void casaPlebeuDialog() {
-		System.out.println("\t"+plebeus.get("plebeuTraira").getNome()+": GUARDAS, O PALADINO ESTÁ AQUI!");
-		System.out.println("\t\t\t"+plebeus.get("plebeuTraira").getNome()+"ataca você enquanto os guardas chegam");
+		System.out.println("\t --"+plebeus.get("plebeuTraira").getNome()+": GUARDAS, O PALADINO ESTÁ AQUI!");
+		System.out.println("--------- "+plebeus.get("plebeuTraira").getNome()+"ataca você enquanto os guardas chegam ---------");
 		ModoBatalha duelo = new ModoBatalha(paladino, plebeus.get("plebeuTraira"));
 		duelo.batalhar();
 		if (duelo.quemVenceu() instanceof Paladino) {
-			System.out.println("\tGuardas: Ataquem o Paladino!");
+			System.out.println("\t --Guardas: Ataquem o Paladino!");
 			
 			for (Inimigo e : inimigos.values()) {
 				ModoBatalha fight = new ModoBatalha(paladino, e);
 				fight.batalhar();
+			}
+			
+			if (paladino.getVivo()) {
+				for (String chave : inimigos.keySet()) {
+					inimigos.remove(chave);
+				}
 			}
 		}
 	}
 	
 	private void medicDialog() {
 		System.out.println("\t"+medico.getNome()+": O que posso fazer por você, meu filho?");
-		System.out.println("\t\t1- Curar"
-				+ "\t\t2- Aumentar vida"
-				+ "\t\t3- Desculpe-me, foi um engano");
+		System.out.println("\t\t1- Curar\n"
+				+ "\t\t2- Aumentar vida\n"
+				+ "\t\t3- Desculpe-me, foi um engano\n");
 		int opt = input.nextInt();
 		ModoCura mc = new ModoCura(paladino, medico);
 		switch (opt) {
 		case 1:
 			if (mc.curar()) {
-				System.out.println("\t"+medico.getNome()+": Deixe-me ver isso ... Pronto, agora está inteiro novamente!");
+				System.out.println("\t --"+medico.getNome()+": Deixe-me ver isso ... Pronto, agora está inteiro novamente!");
 			} else {
 				System.out.println("Você não tem ouro suficiente!");
 			}
 			break;
 		case 2:
 			if (mc.aumentarVida()) {
-				System.out.println("\t"+medico.getNome()+": Quanta força, meu filho! Eu costumava ser um aventureiro "
+				System.out.println("\t --"+medico.getNome()+": Quanta força, meu filho! Eu costumava ser um aventureiro "
 						+ "como você... até que eu levei uma flechada no joelho.");
 			} else {
 				System.out.println("Você não tem ouro suficiente!");
