@@ -10,7 +10,7 @@
 # Estrutura do jogo
  - Personagens 
    - Inimigos: bandidos/guardas do Fogo Eterno: Soldado.
-   - Neutros: Médicos, Cidadãos.
+   - Neutros: Médico, Cidadãos.
    - Paladino
 
 # TODO
