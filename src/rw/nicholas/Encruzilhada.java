@@ -70,6 +70,9 @@ public class Encruzilhada extends Fase{
 					input.nextLine(); //Pausa
 					continuar = false;
 					break;
+				} else {
+					System.out.println("Não foi dessa vez, prepare-se para a batalha!");
+					input.nextLine(); //Pausa
 				}
 			case 2:
 				for (Inimigo e : inimigos) {

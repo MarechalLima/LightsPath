@@ -9,11 +9,19 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
+		System.out.println("ATENÇÃO: Este jogo utiliza um d20 para verificar se uma ação sua é bem-sucedida, bem como para"
+				+ " determinar quem inicia uma batalha. Além disso, todos os informações dos personagens, também são definidas"
+				+ " randomicamente por um dado de X faces. Utilize a tecla Enter para avançar diálogos!");
+		input.nextLine(); //Pausa para Disclaimer
+		
 		System.out.println("Qual o seu nome (primeiro apenas)?");
 		String jogador = input.next();
+		input.nextLine(); //Descartando \n
+		
 		Paladino paladino = new Paladino(jogador, 20, 100);
 		Encruzilhada encruzilhada = new Encruzilhada(paladino);
 		Novigrad novigrad = new Novigrad(paladino);
+		
 		ArrayList<Fase> fases = new ArrayList<Fase>();
 		fases.add(encruzilhada);
 		fases.add(novigrad);
