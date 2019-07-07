@@ -19,10 +19,12 @@ public class Encruzilhada extends Fase{
 	public void start() {
 		do {
 			int opt = input.nextInt();
+			input.nextLine(); //Descartar o \n
 			
 			switch (opt) {
 			case 1:
 				System.out.println("Como fiél guerreiro da Luz, você irá defender o direito daqueles que também quiserem seguir o caminho da Luz.\n");
+				input.nextLine(); //Dar pausa no jogo
 				bandidosEncruzilhada();
 				tmpCount = 3; // Para sair do loop
 				break;
@@ -59,11 +61,13 @@ public class Encruzilhada extends Fase{
 					+ "\t2- Sacar arma\n"
 					+ "\t3- Consultar informações do seu Paladino");
 			opt = input.nextInt();
+			input.nextLine(); //Descartar o \n
 			
 			switch (opt) {
 			case 1:
 				if (paladino.randDado(20, 1) >= 15) {
 					System.out.println("Parabéns, você conseguiu conjurar 'Manto do Exilado', ficando oculto.");
+					input.nextLine(); //Pausa
 					continuar = false;
 					break;
 				}
@@ -73,10 +77,10 @@ public class Encruzilhada extends Fase{
 					fight.batalhar();
 				}
 				if (paladino.getVivo()) {
-					System.out.println("Parabéns, por meio de sua fé e determinação você foi capaz de superar mais esses obstáculos.\n");
+					System.out.println("Parabéns, por meio de sua fé e determinação você foi capaz de derrotá-los.\n");
+					input.nextLine(); //Pausa
 					continuar = false;
 				} else {
-					System.out.println("Você não foi capaz de defender o povo de Novigrad, o Fogo Eterno queimou você.");
 					continuar = false;
 				}
 				break;

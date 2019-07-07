@@ -1,7 +1,7 @@
 package rw.nicholas;
 
-import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentHashMap;
 
 import rw.nicholas.personagens.Inimigo;
 import rw.nicholas.personagens.Medico;
@@ -12,9 +12,11 @@ public class Novigrad extends Fase{
 	private Paladino paladino;
 	private Scanner input = new Scanner(System.in);
 	private Medico medico;
+	private boolean taberna = false;
+	private boolean casaPlebeu = false;
 
-	private HashMap<String, Inimigo> inimigos = new HashMap<String, Inimigo>();
-	private HashMap<String, Plebeu> plebeus = new HashMap<String, Plebeu>();
+	private ConcurrentHashMap<String, Inimigo> inimigos = new ConcurrentHashMap<String, Inimigo>();
+	private ConcurrentHashMap<String, Plebeu> plebeus = new ConcurrentHashMap<String, Plebeu>();
 	
 	public Novigrad(Paladino paladino) {
 		this.paladino = paladino;
@@ -33,13 +35,23 @@ public class Novigrad extends Fase{
 			
 			switch (opt) {
 			case 1:
-				tabernaDialog();
+				if (taberna == false) {
+					tabernaDialog();
+					taberna = true;
+				} else {
+					System.out.println("Você não pode mais entrar aqui!");
+				}
 				break;
 			case 2:
 				medicDialog();
 				break;
 			case 3:
-				casaPlebeuDialog();
+				if (casaPlebeu == false) {
+					casaPlebeuDialog();
+					casaPlebeu = true;
+				} else {
+					System.out.println("Você não pode mais entrar aqui!");
+				}
 				break;
 			case 4:
 				System.out.println(paladino.toString());
@@ -58,13 +70,14 @@ public class Novigrad extends Fase{
 				+ "\t3- Procurar ajuda em alguma casa\n"
 				+ "\t4- Ver informações do Paladino\n");
 		int retorno = input.nextInt();
+		input.nextLine(); //Descartar o \n
 		
 		return retorno;
 	}
 	
 	private void tabernaDialog() {
-		System.out.println("\tTaberneiro: Bom dia, senhor... Eu acho melhor o senhor se retirar, a Luz foi há muito"
-				+ " substituida pelo Fogo Eterno... Além do mais, há sempre guarda aqui.");
+		System.out.println("\t --Taberneiro: Bom dia, senhor... Eu acho melhor o senhor se retirar, a Luz foi há muito"
+				+ " substituida pelo Fogo Eterno... Além do mais, há sempre guardas aqui.");
 		int opt = tabernaMenuTaberneiro();
 		
 		switch (opt) {
@@ -89,6 +102,7 @@ public class Novigrad extends Fase{
 				+ "\t2- Estou protegido pela Luz, nem exércitos poderão me tocar\n"
 				+ "\t3- Tudo bem, que a Luz seja seu guia (Sair)\n");
 		int retorno = input.nextInt();
+		input.nextLine(); //Descartar o \n
 		
 		return retorno;
 	}
@@ -96,6 +110,7 @@ public class Novigrad extends Fase{
 	private void tabernaDialog1() {
 		System.out.println("\t --"+inimigos.get("thugTaberna").getNome()+": Vejam só o que temos aqui, um escravo da Luz..."
 				+ " Achei que sua raça estivesse extinta... Mas não importa, eu me certificarei disso\n");
+		input.nextLine(); //Usando para dar pausa na história
 		ModoBatalha duelo = new ModoBatalha(paladino, inimigos.get("thugTaberna"));
 		duelo.batalhar();
 		if (duelo.quemVenceu() instanceof Paladino) {
@@ -105,9 +120,11 @@ public class Novigrad extends Fase{
 	}
 	
 	private void tabernaDialog2() {
-		System.out.println("\t"+inimigos.get("thugTaberna").getNome()+": Vejam só o que temos aqui, um idiota, e ainda se acha... Veremos se"
+		System.out.println("\t --"+inimigos.get("thugTaberna").getNome()+": Vejam só o que temos aqui, um idiota, e ainda se acha... Veremos se"
 				+ " ele vai conseguir sair vivo daqui! "+inimigos.get("thugVigia").getNome()+"! Venha já aqui, temos que"
 						+ " tirar o lixo!");
+		input.nextLine(); //Usando para dar pausa na história
+		
 		for (Inimigo e : inimigos.values()) {
 			ModoBatalha fight = new ModoBatalha(paladino, e);
 			fight.batalhar();
@@ -121,18 +138,21 @@ public class Novigrad extends Fase{
 	
 	private void tabernaDialog3() {
 		System.out.println("\t --"+inimigos.get("thugVigia").getNome()+": Onde pensa que vai, Paladino?");
+		input.nextLine(); //Usando para dar pausa na história
 		ModoBatalha duelo = new ModoBatalha(paladino, inimigos.get("thugVigia"));
 		duelo.batalhar();
 		if (duelo.quemVenceu() instanceof Paladino) {
 			System.out.println("\t --"+plebeus.get("plebeuTaberna").getNome()+": Você deveria procurar um médico antes, "
 					+ "é perigoso até mesmo para um Paladino andar ferido.");
+			input.nextLine(); //Usando para dar pausa na história
 		}
 	}
 	
 	private void casaPlebeuDialog() {
 		System.out.println("\t --"+plebeus.get("plebeuTraira").getNome()+": GUARDAS, O PALADINO ESTÁ AQUI!");
-		System.out.println("--------- "+plebeus.get("plebeuTraira").getNome()+"ataca você enquanto os guardas chegam ---------");
+		System.out.println("--------- "+plebeus.get("plebeuTraira").getNome()+" ataca você enquanto os guardas chegam ---------");
 		ModoBatalha duelo = new ModoBatalha(paladino, plebeus.get("plebeuTraira"));
+		input.nextLine(); //Pausa
 		duelo.batalhar();
 		if (duelo.quemVenceu() instanceof Paladino) {
 			System.out.println("\t --Guardas: Ataquem o Paladino!");
@@ -144,6 +164,7 @@ public class Novigrad extends Fase{
 			
 			if (paladino.getVivo()) {
 				for (String chave : inimigos.keySet()) {
+					System.out.println(chave);
 					inimigos.remove(chave);
 				}
 			}
@@ -156,6 +177,7 @@ public class Novigrad extends Fase{
 				+ "\t\t2- Aumentar vida\n"
 				+ "\t\t3- Desculpe-me, foi um engano\n");
 		int opt = input.nextInt();
+		input.nextLine(); //Descartar o \n
 		ModoCura mc = new ModoCura(paladino, medico);
 		switch (opt) {
 		case 1:
