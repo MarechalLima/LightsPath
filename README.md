@@ -1,5 +1,6 @@
 # Light Path 
-
+## Integrante
+ - Nícholas Lima de Souza Silva
  - Paladino, há muito tempo uma classe de guerreiros da Luz que foram extintos com a ascensão do Fogo Eterno, propagada pela nobreza descontente com a igualdade disseminada pelos seguidores da Luz. Após um período de exílio, estudando a Luz, você decide que é hora de libertar os plebeus da subjugação estabelecida pelo culto do Fogo Eterno.
 
  - Apenas uma classe: Paladino 
@@ -9,12 +10,12 @@
 
 # Estrutura do jogo
  - Personagens 
-   - Inimigos: bandidos, militares do Fogo Eterno: Soldado.
-   - Neutros: Médicos, Comerciantes, Cidadãos.
+   - Inimigos: bandidos/guardas do Fogo Eterno: Soldado.
+   - Neutros: Médicos, Cidadãos.
    - Paladino
-   
+
 # TODO
   - Armaduras
   - Escudo
-  - Neutros: Ferreiros
+  - Neutros: Ferreiros, Comerciantes
   - Inimigos: Mestres do Círculo
