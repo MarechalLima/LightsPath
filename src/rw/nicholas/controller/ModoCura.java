@@ -1,6 +1,6 @@
-package rw.nicholas;
-import rw.nicholas.personagens.Medico;
-import rw.nicholas.personagens.Paladino;
+package rw.nicholas.controller;
+import rw.nicholas.model.personagens.Medico;
+import rw.nicholas.model.personagens.Paladino;
 
 public class ModoCura {
 	private Paladino paladino;

@@ -1,4 +1,6 @@
-package rw.nicholas.personagens;
+package rw.nicholas.model.personagens;
+
+import rw.nicholas.model.Escudo;
 
 public class Paladino extends Personagem{
 	private int maxVida; //O médico cura apenas o paladino, por enquanto

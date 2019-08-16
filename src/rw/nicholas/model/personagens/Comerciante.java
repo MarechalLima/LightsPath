@@ -1,4 +1,4 @@
-package rw.nicholas.personagens;
+package rw.nicholas.model.personagens;
 
 public class Comerciante extends Neutro {
 

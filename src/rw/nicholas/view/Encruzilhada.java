@@ -1,10 +1,12 @@
-package rw.nicholas;
+package rw.nicholas.view;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import rw.nicholas.personagens.Inimigo;
-import rw.nicholas.personagens.Paladino;
+import rw.nicholas.model.Fase;
+import rw.nicholas.model.personagens.Inimigo;
+import rw.nicholas.model.personagens.Paladino;
+import rw.nicholas.controller.ModoBatalha;
 
 public class Encruzilhada extends Fase{
 	private int tmpCount;

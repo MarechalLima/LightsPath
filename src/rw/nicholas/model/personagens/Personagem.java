@@ -1,4 +1,4 @@
-package rw.nicholas.personagens;
+package rw.nicholas.model.personagens;
 
 import java.util.Random;
 

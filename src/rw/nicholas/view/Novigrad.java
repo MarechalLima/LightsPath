@@ -1,12 +1,15 @@
-package rw.nicholas;
+package rw.nicholas.view;
 
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
-import rw.nicholas.personagens.Inimigo;
-import rw.nicholas.personagens.Medico;
-import rw.nicholas.personagens.Paladino;
-import rw.nicholas.personagens.Plebeu;
+import rw.nicholas.model.Fase;
+import rw.nicholas.model.personagens.Inimigo;
+import rw.nicholas.model.personagens.Medico;
+import rw.nicholas.model.personagens.Paladino;
+import rw.nicholas.model.personagens.Plebeu;
+import rw.nicholas.controller.ModoBatalha;
+import rw.nicholas.controller.ModoCura;
 
 public class Novigrad extends Fase{
 	private Paladino paladino;

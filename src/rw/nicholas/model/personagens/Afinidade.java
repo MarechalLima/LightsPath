@@ -1,4 +1,4 @@
-package rw.nicholas.personagens;
+package rw.nicholas.model.personagens;
 
 public interface Afinidade {
 	public boolean matchAfinidade(Paladino paladino);

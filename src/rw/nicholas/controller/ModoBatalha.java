@@ -1,7 +1,8 @@
-package rw.nicholas;
+package rw.nicholas.controller;
 import java.util.Scanner;
 
-import rw.nicholas.personagens.*;
+import rw.nicholas.model.personagens.Paladino;
+import rw.nicholas.model.personagens.Personagem;
 
 public class ModoBatalha {
 	private Paladino paladino;

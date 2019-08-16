@@ -3,7 +3,10 @@ package rw.nicholas;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import rw.nicholas.personagens.Paladino;
+import rw.nicholas.model.Fase;
+import rw.nicholas.model.personagens.Paladino;
+import rw.nicholas.view.Encruzilhada;
+import rw.nicholas.view.Novigrad;
 
 public class Main {
 
