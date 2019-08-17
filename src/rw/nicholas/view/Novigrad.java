@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
 import rw.nicholas.model.Fase;
+import rw.nicholas.model.exceptions.EntradaProibidaException;
+import rw.nicholas.model.exceptions.EscolhaInvalidaException;
 import rw.nicholas.model.personagens.Inimigo;
 import rw.nicholas.model.personagens.Medico;
 import rw.nicholas.model.personagens.Paladino;
@@ -24,8 +26,8 @@ public class Novigrad extends Fase{
 	public Novigrad(Paladino paladino) {
 		this.paladino = paladino;
 		medico = new Medico("Doctor", 5);
-		inimigos.put("thugTaberna", new Inimigo("Cabeça de Martelo", 10));
-		inimigos.put("thugVigia", new Inimigo("Salamandra", 8));
+//		inimigos.put("thugTaberna", new Inimigo("Cabeça de Martelo", 10, new Novigrad(null)));
+//		inimigos.put("thugVigia", new Inimigo("Salamandra", 8, new Novigrad(null)));
 		plebeus.put("plebeuTraira", new Plebeu("Ingvar", 6, "fogo eterno"));
 		plebeus.put("plebeuTaberna", new Plebeu("Sigvarson", 6, "luz"));
 	}
@@ -34,7 +36,17 @@ public class Novigrad extends Fase{
 		System.out.println("Você finalmente chegou a Novigrad, uma cidade deslumbrante à primeira vista.");
 		while (!inimigos.isEmpty() && paladino.getVivo()) {
 			System.out.println("Você está nas ruas de Novigrad, o que você deseja fazer?");
-			int opt = menu();
+			int opt;
+			while(true) {
+				try {
+					opt = menu();
+					break;
+				} catch (EntradaProibidaException epe) {
+					System.out.println(epe.getMessage());
+				} catch (EscolhaInvalidaException eie) {
+					System.out.println(eie.getMessage());
+				}
+			}
 			
 			switch (opt) {
 			case 1:
@@ -67,14 +79,22 @@ public class Novigrad extends Fase{
 		}
 	}
 	
-	private int menu() {
+	private int entrada() throws EntradaProibidaException {
+		int retorno = input.nextInt();
+		input.nextLine(); //Descartar o \n
+		
+//		if
+		
+		return retorno;
+	}
+	
+	private int menu() throws EntradaProibidaException, EscolhaInvalidaException {
 		System.out.println("\t1- Ir a taberna\n"
 				+ "\t2- Visitar um médico\n"
 				+ "\t3- Procurar ajuda em alguma casa\n"
 				+ "\t4- Ver informações do Paladino\n");
-		int retorno = input.nextInt();
-		input.nextLine(); //Descartar o \n
 		
+		int retorno = entrada();
 		return retorno;
 	}
 	

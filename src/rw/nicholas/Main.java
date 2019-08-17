@@ -15,11 +15,15 @@ public class Main {
 		System.out.println("ATENÇÃO: Este jogo utiliza um d20 para verificar se uma ação sua é bem-sucedida, bem como para"
 				+ " determinar quem inicia uma batalha. Além disso, todos as informações dos personagens, também são definidas"
 				+ " randomicamente por um dado de X faces. Utilize a tecla Enter para avançar diálogos!");
-		input.nextLine(); //Pausa para Disclaimer
+		if(input.hasNextLine()) {
+			input.nextLine(); //Pausa para Disclaimer
+		}
 		
 		System.out.println("Qual o seu nome (primeiro apenas)?");
-		String jogador = input.next();
-		input.nextLine(); //Descartando \n
+		String jogador = input.next(); // O jogador pode dar o nome que desejar, logo sem try
+		if(input.hasNextLine()) {
+			input.nextLine(); //Descartando o \n
+		}
 		
 		Paladino paladino = new Paladino(jogador, 20, 100);
 		Encruzilhada encruzilhada = new Encruzilhada(paladino);

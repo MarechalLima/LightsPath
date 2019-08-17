@@ -21,12 +21,16 @@ public class Encruzilhada extends Fase{
 	public void start() {
 		do {
 			int opt = input.nextInt();
-			input.nextLine(); //Descartar o \n
+			if(input.hasNextLine()) {
+				input.nextLine(); //Descartar o \n
+			}
 			
 			switch (opt) {
 			case 1:
 				System.out.println("Como fiél guerreiro da Luz, você irá defender o direito daqueles que também quiserem seguir o caminho da Luz.\n");
-				input.nextLine(); //Dar pausa no jogo
+				if(input.hasNextLine()) {
+					input.nextLine(); //Pausa
+				}
 				bandidosEncruzilhada();
 				tmpCount = 3; // Para sair do loop
 				break;
@@ -53,8 +57,8 @@ public class Encruzilhada extends Fase{
 		int opt = 0;
 		boolean continuar = true;
 		ArrayList<Inimigo> inimigos = new ArrayList<Inimigo>();
-		inimigos.add(new Inimigo("Quebra-Ossos", 10));
-		inimigos.add(new Inimigo("Palitinho", 6));
+		inimigos.add(new Inimigo("Quebra-Ossos", 10, new Encruzilhada(null)));
+		inimigos.add(new Inimigo("Palitinho", 6, new Encruzilhada(null)));
 		
 		do {
 			System.out.println("Seguindo sua viagem a Novigrad, você dá de cara com dois brutamontes que tinham a insígnia do Fogo Eterno em seus trapos."
@@ -63,18 +67,24 @@ public class Encruzilhada extends Fase{
 					+ "\t2- Sacar arma\n"
 					+ "\t3- Consultar informações do seu Paladino");
 			opt = input.nextInt();
-			input.nextLine(); //Descartar o \n
+			if(input.hasNextLine()) {
+				input.nextLine(); //Descartar o \n
+			}
 			
 			switch (opt) {
 			case 1:
 				if (paladino.randDado(20, 1) >= 15) {
 					System.out.println("Parabéns, você conseguiu conjurar 'Manto do Exilado', ficando oculto.");
-					input.nextLine(); //Pausa
+					if(input.hasNextLine()) {
+						input.nextLine(); //Pausa
+					}
 					continuar = false;
 					break;
 				} else {
 					System.out.println("Não foi dessa vez, prepare-se para a batalha!");
-					input.nextLine(); //Pausa
+					if(input.hasNextLine()) {
+						input.nextLine(); //Pausa
+					}
 				}
 			case 2:
 				for (Inimigo e : inimigos) {
@@ -83,7 +93,9 @@ public class Encruzilhada extends Fase{
 				}
 				if (paladino.getVivo()) {
 					System.out.println("Parabéns, por meio de sua fé e determinação você foi capaz de derrotá-los.\n");
-					input.nextLine(); //Pausa
+					if(input.hasNextLine()) {
+						input.nextLine(); //Pausa
+					}
 					continuar = false;
 				} else {
 					continuar = false;

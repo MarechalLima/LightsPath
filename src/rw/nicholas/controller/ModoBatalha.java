@@ -38,7 +38,10 @@ public class ModoBatalha {
 			System.out.println(personagem.getNome()+" derrotou "+paladino.getNome());
 		}
 		Scanner input = new Scanner(System.in);
-		input.nextLine();
+		if(input.hasNextLine()) {
+			input.nextLine();
+		}
+		input.close();
 		return this.vencedor;
 	}
 	
