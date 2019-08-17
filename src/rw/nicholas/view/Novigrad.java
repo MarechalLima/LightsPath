@@ -9,6 +9,7 @@ import rw.nicholas.model.personagens.Inimigo;
 import rw.nicholas.model.personagens.Medico;
 import rw.nicholas.model.personagens.Paladino;
 import rw.nicholas.model.personagens.Plebeu;
+import rw.nicholas.controller.InimigoController;
 import rw.nicholas.controller.ModoBatalha;
 import rw.nicholas.controller.ModoCura;
 
@@ -18,7 +19,9 @@ public class Novigrad extends Fase{
 	private boolean taberna = false;
 	private boolean casaPlebeu = false;
 
-	private ConcurrentHashMap<String, Inimigo> inimigos = new ConcurrentHashMap<String, Inimigo>();
+//	private ConcurrentHashMap<String, Inimigo> inimigos = new ConcurrentHashMap<String, Inimigo>();
+	private InimigoController icInimigos = new InimigoController();
+	
 	private ConcurrentHashMap<String, Plebeu> plebeus = new ConcurrentHashMap<String, Plebeu>();
 	
 	public Novigrad() {}
@@ -26,8 +29,9 @@ public class Novigrad extends Fase{
 	public Novigrad(Paladino paladino) {
 		this.paladino = paladino;
 		medico = new Medico("Doctor", 5);
-		inimigos.put("thugTaberna", new Inimigo("Cabeça de Martelo", 10, new Novigrad()));
-		inimigos.put("thugVigia", new Inimigo("Salamandra", 8, new Novigrad()));
+		
+		icInimigos.inserirInimigo("thugTaberna", "Cabeça de Martelo", 10, new Novigrad());
+		icInimigos.inserirInimigo("thugVigia", "Salamandra", 8, new Novigrad());
 		plebeus.put("plebeuTraira", new Plebeu("Ingvar", 6, "fogo eterno"));
 		plebeus.put("plebeuTaberna", new Plebeu("Sigvarson", 6, "luz"));
 	}
@@ -40,8 +44,8 @@ public class Novigrad extends Fase{
 	}
 	
 	public void start() {
-		System.out.println("Você finalmente chegou a Novigrad, uma cidade deslumbrante à primeira vista.");
-		while (!inimigos.isEmpty() && paladino.getVivo()) {
+		System.out.println("Você finalmente chegou a Novigrad, uma cidade deslumbrante à primeira vista.\n");
+		while (!icInimigos.isEmpty() && paladino.getVivo()) {
 			System.out.println("Você está nas ruas de Novigrad, o que você deseja fazer?");
 			int opt;
 			while(true) {
@@ -127,68 +131,56 @@ public class Novigrad extends Fase{
 	}
 	
 	private void tabernaDialog1() {
-		System.out.println("\t --"+inimigos.get("thugTaberna").getNome()+": Vejam só o que temos aqui, um escravo da Luz..."
+		System.out.println("\t --"+icInimigos.getInimigo("thugTaberna").getNome()+": Vejam só o que temos aqui, um escravo da Luz..."
 				+ " Achei que sua raça estivesse extinta... Mas não importa, eu me certificarei disso\n");
-		pausarDialogo();
+		pausarDialogo(5);
 		
-		ModoBatalha duelo = new ModoBatalha(paladino, inimigos.get("thugTaberna"));
-		duelo.batalhar();
-		if (duelo.quemVenceu() instanceof Paladino) {
+		ModoBatalha fight = new ModoBatalha();
+		fight.duelar(paladino, icInimigos.getInimigo("thugTaberna"));
+		
+		if (fight.quemVenceu() instanceof Paladino) {
 			System.out.println("Embora tivesse vencido, o Paladino sabia que precisaria de ajuda para continuar...\n");
-			inimigos.remove("thugTaberna");
 		}
 	}
 	
 	private void tabernaDialog2() {
-		System.out.println("\t --"+inimigos.get("thugTaberna").getNome()+": Vejam só o que temos aqui, um idiota, e ainda se acha... Veremos se"
-				+ " ele vai conseguir sair vivo daqui! "+inimigos.get("thugVigia").getNome()+"! Venha já aqui, temos que"
+		System.out.println("\t --"+icInimigos.getInimigo("thugTaberna").getNome()+": Vejam só o que temos aqui, um idiota, e ainda se acha... Veremos se"
+				+ " ele vai conseguir sair vivo daqui! "+icInimigos.getInimigo("thugVigia").getNome()+"! Venha já aqui, temos que"
 						+ " tirar o lixo!");
-		pausarDialogo();
+		pausarDialogo(8);
 		
-		for (Inimigo e : inimigos.values()) {
-			ModoBatalha fight = new ModoBatalha(paladino, e);
-			fight.batalhar();
-		}
-		if (paladino.getVivo()) {
-			for (String chave : inimigos.keySet()) {
-				inimigos.remove(chave);
-			}
-		}
+		ModoBatalha fight = new ModoBatalha();
+		fight.batalhar(paladino, new Novigrad());
 	}
 	
 	private void tabernaDialog3() {
-		System.out.println("\t --"+inimigos.get("thugVigia").getNome()+": Onde pensa que vai, Paladino?");
-		pausarDialogo();
+		System.out.println("\t --"+icInimigos.getInimigo("thugVigia").getNome()+": Onde pensa que vai, Paladino?");
+		pausarDialogo(3);
 		
-		ModoBatalha duelo = new ModoBatalha(paladino, inimigos.get("thugVigia"));
-		duelo.batalhar();
-		if (duelo.quemVenceu() instanceof Paladino) {
+		ModoBatalha fight = new ModoBatalha();
+		fight.duelar(paladino, icInimigos.getInimigo("thugVigia"));
+		
+		if (fight.quemVenceu() instanceof Paladino) {
 			System.out.println("\t --"+plebeus.get("plebeuTaberna").getNome()+": Você deveria procurar um médico antes, "
 					+ "é perigoso até mesmo para um Paladino andar ferido.");
-			pausarDialogo();
+			pausarDialogo(5);
 		}
 	}
 	
 	private void casaPlebeuDialog() {
 		System.out.println("\t --"+plebeus.get("plebeuTraira").getNome()+": GUARDAS, O PALADINO ESTÁ AQUI!");
-		System.out.println("--------- "+plebeus.get("plebeuTraira").getNome()+" ataca você enquanto os guardas chegam ---------");
-		ModoBatalha duelo = new ModoBatalha(paladino, plebeus.get("plebeuTraira"));
-		pausarDialogo();
+		pausarDialogo(1);
+		System.out.println("--------- "+plebeus.get("plebeuTraira").getNome()+" ataca você enquanto os guardas chegam ---------\n");
+		pausarDialogo(2);
 		
-		duelo.batalhar();
-		if (duelo.quemVenceu() instanceof Paladino) {
-			System.out.println("\t --Guardas: Ataquem o Paladino!");
+		ModoBatalha fight = new ModoBatalha();
+		fight.duelar(paladino, plebeus.get("plebeuTraira"));
+		
+		if (fight.quemVenceu() instanceof Paladino) {
+			System.out.println("\t --Guardas: Ataquem o Paladino!\n");
+			pausarDialogo(1);
 			
-			for (Inimigo e : inimigos.values()) {
-				ModoBatalha fight = new ModoBatalha(paladino, e);
-				fight.batalhar();
-			}
-			
-			if (paladino.getVivo()) {
-				for (String chave : inimigos.keySet()) {
-					inimigos.remove(chave);
-				}
-			}
+			fight.batalhar(paladino, new Novigrad());
 		}
 	}
 	
@@ -218,23 +210,35 @@ public class Novigrad extends Fase{
 		case 1:
 			if (mc.curar()) {
 				System.out.println("\t --"+medico.getNome()+": Deixe-me ver isso ... Pronto, agora está inteiro novamente!");
+				pausarDialogo(3);
 			} else {
 				System.out.println("Não há nada que eu possa fazer aqui!");
+				pausarDialogo(2);
 			}
 			break;
 		case 2:
 			if (mc.aumentarVida()) {
 				System.out.println("\t --"+medico.getNome()+": Quanta força, meu filho! Eu costumava ser um aventureiro "
 						+ "como você... até que eu levei uma flechada no joelho.");
+				pausarDialogo(4);
 			} else {
 				System.out.println("Você não tem ouro suficiente!");
+				pausarDialogo(2);
 			}
 			break;
 
 		case 3:
 			System.out.println("\t --"+medico.getNome()+": Estamos de portas abertas, meu filho!");
+			pausarDialogo(2);
 			break;
 		}
-		pausarDialogo();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Novigrad) {
+			return true;
+		}
+		return false;
 	}
 }

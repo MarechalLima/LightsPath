@@ -1,6 +1,7 @@
 package rw.nicholas.model.exceptions;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class TratamentoDeInput {
 	protected Scanner input = new Scanner(System.in);
@@ -11,7 +12,12 @@ public class TratamentoDeInput {
 		}
 	}
 	
-	public void pausarDialogo() {
-		limparScanner();
+	public void pausarDialogo(int seg) {
+//		limparScanner();
+		try {
+			TimeUnit.SECONDS.sleep(seg);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }

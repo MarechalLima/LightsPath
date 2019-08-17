@@ -3,22 +3,34 @@ package rw.nicholas.controller;
 import rw.nicholas.model.ConcurrentHashMapInimigosDAO;
 import rw.nicholas.model.Fase;
 import rw.nicholas.model.personagens.Inimigo;
+import rw.nicholas.model.personagens.Personagem;
 
 public class InimigoController {
+	private ConcurrentHashMapInimigosDAO inimigoDAO = new ConcurrentHashMapInimigosDAO();
+	
 	public void inserirInimigo(String id, String nome, int dado, Fase fase) {
 		Inimigo inimigo = new Inimigo(nome, dado, fase);
 		
-		ConcurrentHashMapInimigosDAO inimigoDAO = new ConcurrentHashMapInimigosDAO();
 		inimigoDAO.inserirInimigo(id, inimigo);
 	}
 	
 	public void deletarInimigo(String id) {
-		ConcurrentHashMapInimigosDAO inimigoDAO = new ConcurrentHashMapInimigosDAO();
 		inimigoDAO.removerInimigo(id);
 	}
 	
+	public void deletarInimigo(Personagem personagem) {
+		inimigoDAO.removerInimigo(personagem);
+	}
+	
 	public String[] listarInimigos () {
-		ConcurrentHashMapInimigosDAO inimigoDAO = new ConcurrentHashMapInimigosDAO();
 		return inimigoDAO.listarID();
+	}
+	
+	public boolean isEmpty () {
+		return inimigoDAO.isEmpty();
+	}
+	
+	public Inimigo getInimigo(String id) {
+		return inimigoDAO.getInimigo(id);
 	}
 }
