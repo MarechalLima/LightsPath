@@ -1,10 +1,10 @@
 package rw.nicholas.controller;
-import java.util.Scanner;
 
+import rw.nicholas.model.exceptions.TratamentoDeInput;
 import rw.nicholas.model.personagens.Paladino;
 import rw.nicholas.model.personagens.Personagem;
 
-public class ModoBatalha {
+public class ModoBatalha extends TratamentoDeInput{
 	private Paladino paladino;
 	private Personagem personagem;
 	private Personagem vencedor;
@@ -37,11 +37,7 @@ public class ModoBatalha {
 			this.vencedor = personagem;
 			System.out.println(personagem.getNome()+" derrotou "+paladino.getNome());
 		}
-		Scanner input = new Scanner(System.in);
-		if(input.hasNextLine()) {
-			input.nextLine();
-		}
-		input.close();
+		pausarDialogo();
 		return this.vencedor;
 	}
 	
