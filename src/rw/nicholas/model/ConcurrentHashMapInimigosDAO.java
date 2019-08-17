@@ -6,15 +6,15 @@ import rw.nicholas.model.personagens.Personagem;
 public class ConcurrentHashMapInimigosDAO {
 	
 	public void inserirInimigo (String id, Inimigo inimigo) {
-		ConcurrentHashMapInimigosSingleton.getInstance().inimigos.put(id, inimigo);
+		ConcurrentHashMapInimigosSingleton.getInstance().inimigos.put(id, inimigo); //Seria o INSERT
 	}
 	
 	public void removerInimigo (String id) {
-		ConcurrentHashMapInimigosSingleton.getInstance().inimigos.remove(id);
+		ConcurrentHashMapInimigosSingleton.getInstance().inimigos.remove(id); //Seria o DELETE
 	}
 	
 	public void removerInimigo (Personagem personagem) {
-		ConcurrentHashMapInimigosSingleton.getInstance().inimigos.values().remove(personagem);
+		ConcurrentHashMapInimigosSingleton.getInstance().inimigos.values().remove(personagem); //Seria o DELETE
 	}
 	
 	public String[] listarID() {
@@ -23,14 +23,14 @@ public class ConcurrentHashMapInimigosDAO {
 		for (String id : ConcurrentHashMapInimigosSingleton.getInstance().inimigos.keySet()) {
 			output[i++] = id;
 		}
-		return output;
+		return output; //SELECT id
 	}
 	
 	public Inimigo getInimigo(String id) {
-		return ConcurrentHashMapInimigosSingleton.getInstance().inimigos.get(id);
+		return ConcurrentHashMapInimigosSingleton.getInstance().inimigos.get(id); //Seria um SELECT ... WHERE id = ?;
 	}
 	
 	public boolean isEmpty() {
-		return ConcurrentHashMapInimigosSingleton.getInstance().inimigos.isEmpty();
+		return ConcurrentHashMapInimigosSingleton.getInstance().inimigos.isEmpty(); //Seria um SELECT COUNT(id) retornando 0
 	}
 }
