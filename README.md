@@ -16,12 +16,7 @@
    - Neutros: Médico, Cidadãos.
    - Paladino
    
-  - Em cada batalha (que é na verdade um duelo), é sorteado uma iniciativa para determinar qual dos personagens irá iniciar batendo.
+  - Em cada batalha (que é na verdade um duelo do paladino com os outros personagens sequencialmente), é sorteado uma iniciativa para determinar qual dos personagens irá iniciar batendo.
   - O objetivo do Paladino, inicialmente, é derrotar todos os Inimigos, que estão a serviço do Fogo Eterno.
   - O jogo acaba quando o item anterior acontecer, ou o Paladino morrer.
 
-# TODO
-  - Armaduras
-  - Escudo
-  - Neutros: Ferreiros, Comerciantes
-  - Inimigos: Mestres do Círculo
