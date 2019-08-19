@@ -30,7 +30,16 @@ public class ConcurrentHashMapInimigosDAO {
 		return ConcurrentHashMapInimigosSingleton.getInstance().inimigos.get(id); //Seria um SELECT ... WHERE id = ?;
 	}
 	
-	public boolean isEmpty() {
-		return ConcurrentHashMapInimigosSingleton.getInstance().inimigos.isEmpty(); //Seria um SELECT COUNT(id) retornando 0
+	public boolean isEmpty(Fase fase) {
+		int count = 0;
+		for (Inimigo enemy : ConcurrentHashMapInimigosSingleton.getInstance().inimigos.values()) {
+			if (fase.equals(enemy.getFase())) {
+				count++;
+			}
+		}
+		if (count == 0) { //Seria um SELECT COUNT(id) retornando 0
+			return true;
+		}
+		return false;
 	}
 }

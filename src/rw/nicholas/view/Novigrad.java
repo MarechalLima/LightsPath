@@ -18,7 +18,6 @@ public class Novigrad extends Fase{
 	private boolean taberna = false;
 	private boolean casaPlebeu = false;
 
-//	private ConcurrentHashMap<String, Inimigo> inimigos = new ConcurrentHashMap<String, Inimigo>();
 	private InimigoController icInimigos = new InimigoController();
 	
 	private ConcurrentHashMap<String, Plebeu> plebeus = new ConcurrentHashMap<String, Plebeu>();
@@ -44,7 +43,7 @@ public class Novigrad extends Fase{
 	
 	public void start() {
 		System.out.println("Você finalmente chegou a Novigrad, uma cidade deslumbrante à primeira vista.\n");
-		while (!icInimigos.isEmpty() && paladino.getVivo()) {
+		while (!icInimigos.isEmpty(new Novigrad()) && paladino.getVivo()) {
 			System.out.println("Você está nas ruas de Novigrad, o que você deseja fazer?");
 			int opt;
 			while(true) {

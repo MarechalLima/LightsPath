@@ -6,6 +6,7 @@ import rw.nicholas.model.exceptions.TratamentoDeInput;
 import rw.nicholas.model.personagens.Paladino;
 import rw.nicholas.view.Encruzilhada;
 import rw.nicholas.view.Novigrad;
+import rw.nicholas.view.SaidaDeNovigrad;
 
 class Run extends TratamentoDeInput{
 	public void start() {
@@ -23,10 +24,12 @@ class Run extends TratamentoDeInput{
 		Paladino paladino = new Paladino(jogador, 20, 100);
 		Encruzilhada encruzilhada = new Encruzilhada(paladino);
 		Novigrad novigrad = new Novigrad(paladino);
+		SaidaDeNovigrad saidaNovigrad = new SaidaDeNovigrad(paladino);
 		
 		ArrayList<Fase> fases = new ArrayList<Fase>();
 		fases.add(encruzilhada);
 		fases.add(novigrad);
+		fases.add(saidaNovigrad);
 		
 		for (Fase e : fases) {
 			if (paladino.getVivo())

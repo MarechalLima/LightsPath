@@ -26,8 +26,8 @@ public class InimigoController {
 		return inimigoDAO.listarID();
 	}
 	
-	public boolean isEmpty () {
-		return inimigoDAO.isEmpty();
+	public boolean isEmpty (Fase fase) {
+		return inimigoDAO.isEmpty(fase);
 	}
 	
 	public Inimigo getInimigo(String id) {
