@@ -13,7 +13,6 @@ public class TratamentoDeInput {
 	}
 	
 	public void pausarDialogo(int seg) {
-//		limparScanner();
 		try {
 			TimeUnit.SECONDS.sleep(seg);
 		} catch (InterruptedException e) {

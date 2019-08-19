@@ -1,12 +1,8 @@
 package rw.nicholas.view;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import rw.nicholas.model.Fase;
 import rw.nicholas.model.exceptions.EntradaProibidaException;
 import rw.nicholas.model.exceptions.EscolhaInvalidaException;
-import rw.nicholas.model.personagens.Inimigo;
 import rw.nicholas.model.personagens.Paladino;
 import rw.nicholas.controller.InimigoController;
 import rw.nicholas.controller.ModoBatalha;

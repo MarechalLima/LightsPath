@@ -5,7 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import rw.nicholas.model.Fase;
 import rw.nicholas.model.exceptions.EntradaProibidaException;
 import rw.nicholas.model.exceptions.EscolhaInvalidaException;
-import rw.nicholas.model.personagens.Inimigo;
 import rw.nicholas.model.personagens.Medico;
 import rw.nicholas.model.personagens.Paladino;
 import rw.nicholas.model.personagens.Plebeu;

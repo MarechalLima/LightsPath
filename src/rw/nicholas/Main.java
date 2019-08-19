@@ -1,8 +1,6 @@
 package rw.nicholas;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import rw.nicholas.model.Fase;
 import rw.nicholas.model.exceptions.TratamentoDeInput;
 import rw.nicholas.model.personagens.Paladino;

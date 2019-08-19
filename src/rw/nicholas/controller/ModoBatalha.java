@@ -2,21 +2,14 @@ package rw.nicholas.controller;
 
 import rw.nicholas.model.Fase;
 import rw.nicholas.model.exceptions.TratamentoDeInput;
+import rw.nicholas.model.personagens.Afinidade;
 import rw.nicholas.model.personagens.Inimigo;
 import rw.nicholas.model.personagens.Paladino;
 import rw.nicholas.model.personagens.Personagem;
-import rw.nicholas.view.Novigrad;
 
 public class ModoBatalha extends TratamentoDeInput{
-//	private Paladino paladino;
-//	private Personagem personagem;
 	private Personagem vencedor;
 	private InimigoController icInimigo;
-	
-//	public ModoBatalha(Paladino paladino, Personagem personagem) {
-//		this.paladino = paladino;
-//		this.personagem = personagem;
-//	}
 	
 	public ModoBatalha() {
 		icInimigo = new InimigoController();
@@ -37,10 +30,37 @@ public class ModoBatalha extends TratamentoDeInput{
 		return vencedor;
 	}
 	
+	private boolean evitarDuelo(Paladino paladino, Personagem personagem) {
+		/** Caso o Paladino tenha conseguido persuadir o personagem, ambos serão servidores da Luz **/
+		if (personagem instanceof Afinidade) {
+			Afinidade carinha = (Afinidade) personagem;
+			if (personagem instanceof Inimigo) {
+				Inimigo enemy = (Inimigo) personagem;
+				boolean eAlterado = enemy.alterarAfinidade(paladino);
+				System.out.println("--Eu: Não brigue irmão, a luz ainda poderá redimir suas regressões!");
+				pausarDialogo(3);
+				if (eAlterado == false) {
+					System.out.println("--"+personagem.getNome()+": Não seja patético, Paladino!");
+					pausarDialogo(2);
+				}
+			}
+			if (carinha.matchAfinidade(paladino)) {
+				System.out.println("A Luz foi mais forte, não haverá sangue!");
+				icInimigo.deletarInimigo(personagem);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public Personagem duelar(Paladino paladino, Personagem personagem) {
 		if (!paladino.getVivo()) {
 			System.out.println("A crueldade é tamanha, que mesmo com o Paladino prostrado no chão"
 					+ "... Seus agressores não param.\n");
+		}
+		
+		if (evitarDuelo(paladino, personagem) == true) {
+			return paladino;
 		}
 		
 		int percepcaoPaladino = paladino.randDado(20, 1);
@@ -75,6 +95,8 @@ public class ModoBatalha extends TratamentoDeInput{
 	public Personagem quemVenceu() {
 		return this.vencedor;
 	}
+	
+	
 	
 	
 }

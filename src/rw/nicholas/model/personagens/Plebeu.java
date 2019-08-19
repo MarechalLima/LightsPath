@@ -1,7 +1,7 @@
 package rw.nicholas.model.personagens;
 
 public class Plebeu extends Neutro implements Afinidade{
-	public String afinidade;
+	private String afinidade;
 	
 	public Plebeu(String nome, int dado, String afinidade) {
 		super(nome, dado);
