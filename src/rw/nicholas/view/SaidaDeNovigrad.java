@@ -17,8 +17,9 @@ public class SaidaDeNovigrad extends Fase{
 	@Override
 	public void start() {
 		if (icInimigos.isEmpty(new Encruzilhada()) == false) {
-			System.out.println("Ao sair de Novigrad... Você encontra aqueles brutamontes que você foi"
+			System.out.println("\nAo sair de Novigrad... Você encontra aqueles brutamontes que você foi"
 					+ " capaz de evitar, mas essa não será uma opção agora!");
+			pausarDialogo(4);
 			ModoBatalha fight = new ModoBatalha();
 			fight.batalhar(paladino, new Encruzilhada());
 		}
